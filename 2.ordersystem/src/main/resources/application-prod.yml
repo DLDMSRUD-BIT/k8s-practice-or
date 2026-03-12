@@ -1,0 +1,42 @@
+
+spring:
+  config:
+    active:
+      on-profiles: prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    # 아래 ${}은 pod를 실행하는 시점의 k8s secret에서 불러와서 주입
+    url: jdbc:mariadb://${DB_HOST}:3306/ordersystem?useSSL=true
+    username: admin
+    password: ${DB_PW}
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto : create
+    show_sql: true
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+  redis:
+    host: my-redis
+    port: 6379
+
+jwt:
+  expiration: 30
+  #  인코딩된 문자 32자 이상 필요.(특수문자) : base64 encoder
+  #  beyondaccesstokensecretkeybeyondaccesstokensecretkeybeyondaccesstokensecretkey
+  secretKey: YmV5b25kYWNjZXNzdG9rZW5zZWNyZXRrZXliZXlvbmRhY2Nlc3N0b2tlbnNlY3JldGtleWJleW9uZGFjY2Vzc3Rva2Vuc2VjcmV0a2V5
+  expirationRt: 3000
+  secretKeyRt: YmV5b25kYWNjZXNzdG9rZW5zZWNyZXRrZXliZXlvbmRhY2Nlc3N0b2tlbnNlY3JldGtleWJleW9uZGFjY2Vzc3Rva2Vuc2VjcmV0a2V5
+
+aws:
+  credentials:
+    access-key: xxxxxxxxxxx
+    secret-key: xxxxxxxxxxx
+  region: ap-northeast-2
+  s3:
+    bucket1: himynameis-board-profileimage
+
