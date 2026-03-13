@@ -18,7 +18,7 @@ spring:
     username: admin
     password: ${DB_PW}
 #    db의 낮은 스펙과 msa의 많은 커넥션 감안한 커넥션 최소 설정
-    hiker:
+    hikari:
       maximum-pool-size: 1
   jpa:
     database: mysql
