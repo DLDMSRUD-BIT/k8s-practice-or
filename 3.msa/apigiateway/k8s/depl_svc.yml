@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: apigateway-depl
+  name: apigiateway-depl
   namespace: dmsrud-ns
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: apigateway
+      app: apigiateway
   template:
     metadata:
       labels:
-        app: apigateway
+        app: apigiateway
     spec:
       containers:
-      - name: apigateway
-        image: 346903264902.dkr.ecr.ap-northeast-2.amazonaws.com/dmsrud-ns/apigateway:latest
+      - name: apigiateway
+        image: 346903264902.dkr.ecr.ap-northeast-2.amazonaws.com/dmsrud-ns/apigiateway:latest
         ports:
         - containerPort: 8080
         resources:
@@ -41,7 +41,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: apigateway-service
+  name: apigiateway-service
   namespace: dmsrud-ns
 spec:
   type: ClusterIP
@@ -49,4 +49,4 @@ spec:
   - port: 80
     targetPort: 8080
   selector:
-    app: apigateway
+    app: apigiateway
