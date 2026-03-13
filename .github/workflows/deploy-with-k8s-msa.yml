@@ -32,21 +32,21 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: apigateway build and push
+      - name: apigiateway build and push
         env:
           REGISTRY: 346903264902.dkr.ecr.ap-northeast-2.amazonaws.com
-          REPOSITORY: dmsrud-ns/apigateway
+          REPOSITORY: dmsrud-ns/apigiateway
           IMAGE_TAG: latest
         run: |
           docker build \
           -t $REGISTRY/$REPOSITORY:$IMAGE_TAG \
-          -f ./3.msa/apigateway/Dockerfile ./3.msa/apigateway
+          -f ./3.msa/apigiateway/Dockerfile ./3.msa/apigiateway
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
-      - name: apigateway kubectl apply
+      - name: apigiateway kubectl apply
         run: |
-          kubectl apply -f ./3.msa/apigateway/k8s/depl_svc.yml
-          kubectl rollout restart deployment apigateway-depl -n dmsrud-ns
+          kubectl apply -f ./3.msa/apigiateway/k8s/depl_svc.yml
+          kubectl rollout restart deployment apigiateway-depl -n dmsrud-ns
 
       - name: member build and push
         env:
