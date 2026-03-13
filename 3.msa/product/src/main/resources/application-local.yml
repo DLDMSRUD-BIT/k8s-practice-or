@@ -1,0 +1,48 @@
+server:
+   port: 0
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  application:
+    name: product-service
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/ordermsa
+    username: root
+    password: test1234
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto : create
+    show_sql: true
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+  redis:
+    host: localhost
+    port: 6379
+  kafka:
+    kafka-server: localhost:9092
+    consumer:
+#      카프카에서 그룹 id는 컨슈머 그룹을 식별하는 id로서 동일한 그룹id를 가진 컨슈머들은 메세지를 문담해서 consmer
+      group-id: product-group
+
+#안쓰면 비활성화
+aws:
+  credentials:
+    access-key: xxxxxxxxxx #엑세스 키
+    secret-key: yyyyyyyyyyyyy #엑세스 키
+  region: ap-northeast-2
+  s3:
+    bucket1: himynameis-board-profileimage
+

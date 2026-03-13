@@ -1,0 +1,50 @@
+server:
+   port: 0
+
+eureka:
+  client:
+    enabled: false
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  application:
+    name: product-service
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${DB_HOST}:3306:3306/ordermsa?useSSL=true
+    username: admin
+    password: ${DB_PW}
+    #    db의 낮은 스펙과 msa의 많은 커넥션 감안한 커넥션 최소 설정
+    hiker:
+      maximum-pool-size: 1
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto : create
+    show_sql: true
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+  redis:
+    host: redis-service
+    port: 6379
+  kafka:
+    kafka-server: kafka-service:9092
+    consumer:
+#      카프카에서 그룹 id는 컨슈머 그룹을 식별하는 id로서 동일한 그룹id를 가진 컨슈머들은 메세지를 문담해서 consmer
+      group-id: product-group
+
+#안쓰면 비활성화
+aws:
+  credentials:
+    access-key: xxxxxxxxxxx #엑세스 키
+    secret-key: yyyyyyyyyyyyy #엑세스 키
+  region: ap-northeast-2
+  s3:
+    bucket1: himynameis-board-profileimage
+

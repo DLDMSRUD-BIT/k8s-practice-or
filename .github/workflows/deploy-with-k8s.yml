@@ -3,7 +3,7 @@ name: order-backend
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build-and-deploy:
